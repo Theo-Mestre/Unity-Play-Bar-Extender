@@ -10,6 +10,10 @@ public class PlayBarExtenderSettings : ScriptableObject
     [SerializeField]
     public bool UseDefaultSpawnFunctions = true;
 
+    [Tooltip("Invoke functions when 'Move Camera' is used")]
+    [SerializeField]
+    public bool InvokeFunctionOnMoveCamera = true;
+
     [Tooltip("Functions to call when 'Play From Here' is enabled")]
     [SerializeField]
     public UnityEvent PlayerFromHereFunctions = new();

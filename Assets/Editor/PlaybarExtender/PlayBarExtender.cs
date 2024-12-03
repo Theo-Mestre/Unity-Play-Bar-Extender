@@ -12,8 +12,8 @@ namespace PlayBarExtender
         private static readonly int ToolCount;
         private static GUIStyle CommandStyle;
 
-        public static readonly List<Action> LeftToolbarGUI = new();
-        public static readonly List<Action> RightToolbarGUI = new();
+        public static readonly List<Action> LeftPlayBarGUI = new();
+        public static readonly List<Action> RightPlayBarGUI = new();
 
         // Constants for layout dimensions
         private const float Spacing = 8f;
@@ -24,19 +24,19 @@ namespace PlayBarExtender
 
         static PlayBarExtender()
         {
-            // Determine the number of toolbar tools
-            Type toolbarType = typeof(Editor).Assembly.GetType("UnityEditor.Toolbar");
-            FieldInfo toolIconsField = toolbarType?.GetField("k_ToolCount", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+            // Determine the number of playbar tools
+            Type playBarType = typeof(Editor).Assembly.GetType("UnityEditor.Toolbar");
+            FieldInfo toolIconsField = playBarType?.GetField("k_ToolCount", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
 
             ToolCount = toolIconsField != null ? (int)toolIconsField.GetValue(null) : 8;
 
-            // Set up toolbar callbacks
-            ToolbarCallback.OnToolbarGUI = OnToolbarGUI;
-            ToolbarCallback.OnToolbarGUILeft = DrawLeftToolbar;
-            ToolbarCallback.OnToolbarGUIRight = DrawRightToolbar;
+            // Set up playbar callbacks
+            PlayBarCallback.OnPlayBarGUI = OnPlayBarGUI;
+            PlayBarCallback.OnPlayBarGUILeft = DrawLeftPlayBar;
+            PlayBarCallback.OnPlayBarGUIRight = DrawRightPlayBar;
         }
 
-        private static void OnToolbarGUI()
+        private static void OnPlayBarGUI()
         {
             CommandStyle ??= new GUIStyle("CommandLeft");
 
@@ -48,12 +48,12 @@ namespace PlayBarExtender
             Rect leftRect = CreateLeftRect(screenWidth, playButtonPosition);
             Rect rightRect = CreateRightRect(screenWidth, playButtonPosition);
 
-            // Draw left toolbar
+            // Draw left playbar
             if (leftRect.width > 0)
             {
                 GUILayout.BeginArea(leftRect);
                 GUILayout.BeginHorizontal();
-                foreach (var handler in LeftToolbarGUI)
+                foreach (var handler in LeftPlayBarGUI)
                 {
                     handler();
                 }
@@ -61,12 +61,12 @@ namespace PlayBarExtender
                 GUILayout.EndArea();
             }
 
-            // Draw right toolbar
+            // Draw right playbar
             if (rightRect.width > 0)
             {
                 GUILayout.BeginArea(rightRect);
                 GUILayout.BeginHorizontal();
-                foreach (var handler in RightToolbarGUI)
+                foreach (var handler in RightPlayBarGUI)
                 {
                     handler();
                 }
@@ -97,20 +97,20 @@ namespace PlayBarExtender
             };
         }
 
-        public static void DrawLeftToolbar()
+        public static void DrawLeftPlayBar()
         {
             GUILayout.BeginHorizontal();
-            foreach (var handler in LeftToolbarGUI)
+            foreach (var handler in LeftPlayBarGUI)
             {
                 handler();
             }
             GUILayout.EndHorizontal();
         }
 
-        public static void DrawRightToolbar()
+        public static void DrawRightPlayBar()
         {
             GUILayout.BeginHorizontal();
-            foreach (var handler in RightToolbarGUI)
+            foreach (var handler in RightPlayBarGUI)
             {
                 handler();
             }

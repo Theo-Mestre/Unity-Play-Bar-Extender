@@ -33,11 +33,18 @@ namespace PlayBarExtender
             if (settings == null) return;
 
             EditorGUILayout.LabelField("Play Bar Extender Settings", EditorStyles.boldLabel);
+            float originalValue = EditorGUIUtility.labelWidth;
+            EditorGUIUtility.labelWidth = 225.0f;
 
             EditorGUILayout.Space();
             settings.UseDefaultSpawnFunctions = EditorGUILayout.Toggle("Use Default Spawn Functions", settings.UseDefaultSpawnFunctions, GUILayout.ExpandWidth(true));
 
             EditorGUILayout.Space();
+            settings.InvokeFunctionOnMoveCamera = EditorGUILayout.Toggle("Invoke Function On Move Camera", settings.InvokeFunctionOnMoveCamera, GUILayout.ExpandWidth(true));
+            EditorGUIUtility.labelWidth = originalValue;
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Add functions to call when 'Play From Here' is enabled or 'Move Camera' is used");
             serializedObject.Update();
             SerializedProperty serializedProperty = serializedObject.FindProperty("PlayerFromHereFunctions");
             EditorGUILayout.PropertyField(serializedProperty);

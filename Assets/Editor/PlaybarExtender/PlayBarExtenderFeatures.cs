@@ -1,6 +1,5 @@
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
-using UnityEngine.Events;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace PlayBarExtender
 
         static PlayFromHereButton()
         {
-            PlayBarExtender.RightToolbarGUI.Add(OnToolbarGUI);
+            PlayBarExtender.RightPlayBarGUI.Add(OnPlayBarGUI);
             EditorApplication.playModeStateChanged += OnPlayFromHere;
             settings = Resources.Load<PlayBarExtenderSettings>("PlayBarExtender/PlayBarExtenderSettings");
 
@@ -25,7 +24,7 @@ namespace PlayBarExtender
                 return;
             }
         }
-        static void OnToolbarGUI()
+        static void OnPlayBarGUI()
         {
             if (EditorApplication.isPlaying == false)
             {
@@ -38,6 +37,11 @@ namespace PlayBarExtender
             if (GUILayout.Button(new GUIContent("Move Camera", "Move the camera at the editor camera position"), EditorStyles.toolbarButton))
             {
                 SpawnCameraAtEditorCameraPosition();
+
+                if (settings.InvokeFunctionOnMoveCamera)
+                {
+                    settings.PlayerFromHereFunctions.Invoke();
+                }
             }
             GUILayout.FlexibleSpace();
         }
@@ -68,7 +72,8 @@ namespace PlayBarExtender
     {
         static SwitchSceneButtons()
         {
-            PlayBarExtender.LeftToolbarGUI.Add(OnSceneChangerGUI);
+            // Add a new button to the left playbar
+            PlayBarExtender.LeftPlayBarGUI.Add(OnSceneChangerGUI);
         }
 
         static void OnSceneChangerGUI()

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayBarExtenderSettings
   m_EditorClassIdentifier: 
   UseDefaultSpawnFunctions: 1
+  InvokeFunctionOnMoveCamera: 1
   PlayerFromHereFunctions:
     m_PersistentCalls:
       m_Calls: []
