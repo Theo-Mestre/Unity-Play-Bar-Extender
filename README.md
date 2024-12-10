@@ -20,6 +20,13 @@ This project has been inspired by [marijnz's unity-toolbar-extender](https://git
 - Move Player While Playing: Relocate the player to the editor camera's current position during play mode.
 - Customizable Actions: Add custom functions to the "Play From Here" behavior using a ScriptableObject, configurable via an editor window.
 
+### Time Scaler
+- Change the time scale directly from the slider on the play bar.
+
+### Cheat Sheet
+- Call function anytime: Call gameplay function by clicking a button to make debug easier.
+- Customize Actions: You can add your own functions using a ScriptableObject, configurable via an editor window.
+
 ## Installation
 
 In order to use Play Bar Extender, you can import the Unity Package available in [Releases](https://github.com/Theo-Mestre/Unity-Playbar-Extender/releases)
@@ -38,6 +45,8 @@ You can also add Function to be called when `Play from here` is enabled.
 Go to `Tools/Play Bar Extender Settings`, this will open a window where you can change the settings of the button.
 
 ![PlayBarExtenderWindow](https://github.com/user-attachments/assets/87554041-79f3-4447-bbd4-ad039d567415)
+
+Since **version 1.1**, this window also allow you to add function to the cheat sheet dropdown menu and edit the time scale slider's clamp values
 
 ## Requirements
 
