@@ -13,7 +13,7 @@ namespace PlayBarExtender
 
         static PlayFromHereButton()
         {
-            PlayBarExtender.RightPlayBarGUI.Add(OnPlayBarGUI);
+            PlayBarExtender.RightPlayBarGUI.Insert(0, OnPlayBarGUI);
             EditorApplication.playModeStateChanged += OnPlayFromHere;
             settings = Resources.Load<PlayBarExtenderSettings>("PlayBarExtender/PlayBarExtenderSettings");
 
@@ -26,6 +26,8 @@ namespace PlayBarExtender
         }
         static void OnPlayBarGUI()
         {
+            GUILayout.Space(5);
+
             if (EditorApplication.isPlaying == false)
             {
                 string content = playFromHere ? "Play from here enabled" : "Play from here disabled";
@@ -78,8 +80,6 @@ namespace PlayBarExtender
 
         static void OnSceneChangerGUI()
         {
-            GUILayout.FlexibleSpace();
-
             for (int i = 0; i < EditorSceneManager.sceneCountInBuildSettings; i++)
             {
                 string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
@@ -94,6 +94,25 @@ namespace PlayBarExtender
                 }
                 GUILayout.Space(5);
             }
+        }
+    }
+
+    [InitializeOnLoad]
+    public class TimeScaleSlider
+    {
+        static public Vector2 clampValue = new Vector2(0, 2);
+        static TimeScaleSlider()
+        {
+            PlayBarExtender.LeftPlayBarGUI.Add(OnTimeScaleSliderGUI);
+        }
+        static void OnTimeScaleSliderGUI()
+        {
+            GUILayout.FlexibleSpace();
+
+            GUILayout.Label("Time Scale", EditorStyles.miniLabel);
+            Time.timeScale = GUILayout.HorizontalSlider(Time.timeScale, clampValue.x, clampValue.y, GUILayout.Width(100));
+            GUILayout.Label(Time.timeScale.ToString("0.00"), EditorStyles.miniLabel);
+            GUILayout.Space(10);
         }
     }
 }

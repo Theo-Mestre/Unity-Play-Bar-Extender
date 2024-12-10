@@ -1,9 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.Events;
-using System.Collections.Generic;
-using System;
-using UnityEditor.TestTools.TestRunner.Api;
 
 namespace PlayBarExtender
 {
@@ -42,6 +38,10 @@ namespace PlayBarExtender
             EditorGUILayout.Space();
             settings.InvokeFunctionOnMoveCamera = EditorGUILayout.Toggle("Invoke Function On Move Camera", settings.InvokeFunctionOnMoveCamera, GUILayout.ExpandWidth(true));
             EditorGUIUtility.labelWidth = originalValue;
+
+            EditorGUILayout.Space();
+            TimeScaleSlider.clampValue = EditorGUILayout.Vector2Field("Time Scale Slider Clamp", TimeScaleSlider.clampValue);
+            Time.timeScale = Mathf.Clamp(Time.timeScale, TimeScaleSlider.clampValue.x, TimeScaleSlider.clampValue.y);
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Add functions to call when 'Play From Here' is enabled or 'Move Camera' is used");

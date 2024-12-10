@@ -17,3 +17,18 @@ MonoBehaviour:
   PlayerFromHereFunctions:
     m_PersistentCalls:
       m_Calls: []
+  CheatFunctions:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6000453501777311551, guid: 663e275b567c62b45963a4fe22d309a4, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Print
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Cheat Sheet
+          m_BoolArgument: 0
+        m_CallState: 2
