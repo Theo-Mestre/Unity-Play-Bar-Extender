@@ -17,6 +17,4 @@ MonoBehaviour:
   PlayerFromHereFunctions:
     m_PersistentCalls:
       m_Calls: []
-  CheatFunctions:
-  - m_PersistentCalls:
-      m_Calls: []
+  CheatFunctions: []
