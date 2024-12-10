@@ -1,5 +1,6 @@
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 using UnityEditor;
 using UnityEngine;
 
@@ -32,7 +33,6 @@ namespace PlayBarExtender
             {
                 string content = playFromHere ? "Play from here enabled" : "Play from here disabled";
                 playFromHere = GUILayout.Toggle(playFromHere, new GUIContent(content, "Toggle Play from here"), EditorStyles.toolbarButton);
-                GUILayout.FlexibleSpace();
                 return;
             }
 
@@ -45,7 +45,6 @@ namespace PlayBarExtender
                     settings.PlayerFromHereFunctions.Invoke();
                 }
             }
-            GUILayout.FlexibleSpace();
         }
 
         static void OnPlayFromHere(PlayModeStateChange state)
@@ -113,6 +112,61 @@ namespace PlayBarExtender
             Time.timeScale = GUILayout.HorizontalSlider(Time.timeScale, clampValue.x, clampValue.y, GUILayout.Width(100));
             GUILayout.Label(Time.timeScale.ToString("0.00"), EditorStyles.miniLabel);
             GUILayout.Space(10);
+        }
+    }
+
+    [InitializeOnLoad]
+    public class CheatSheet : MonoBehaviour
+    {
+        static readonly PlayBarExtenderSettings settings;
+
+        static CheatSheet()
+        {
+            PlayBarExtender.RightPlayBarGUI.Add(OnCheatSheetGUI);
+
+            settings = Resources.Load<PlayBarExtenderSettings>("PlayBarExtender/PlayBarExtenderSettings");
+
+            if (settings == null)
+            {
+                Debug.LogError("PlayBarExtenderSettings not found. Using default settings");
+                settings = ScriptableObject.CreateInstance<PlayBarExtenderSettings>();
+                return;
+            }
+        }
+        static void OnCheatSheetGUI()
+        {
+            GUILayout.Space(10);
+
+            if (settings.CheatFunctions.Count == 0)
+            {
+                GUILayout.FlexibleSpace();
+                return;
+            }
+
+            if (GUILayout.Button("Cheat Sheet", EditorStyles.toolbarDropDown))
+            {
+                GenericMenu menu = new GenericMenu();
+                for (int i = 0; i < settings.CheatFunctions.Count; i++)
+                {
+                    if (settings.CheatFunctions[i] == null || 
+                        settings.CheatFunctions[i].GetPersistentEventCount() == 0)
+                        continue;
+
+                    UnityEvent cheatFunction = settings.CheatFunctions[i];
+                    menu.AddItem(new GUIContent(cheatFunction.GetPersistentMethodName(0)), false, () =>
+                    {
+                        cheatFunction.Invoke();
+                    });
+                }
+
+                if (menu.GetItemCount() == 0)
+                {
+                    menu.AddDisabledItem(new GUIContent("No functions added"));
+                }
+
+                menu.ShowAsContext();
+            }
+            GUILayout.FlexibleSpace();
         }
     }
 }

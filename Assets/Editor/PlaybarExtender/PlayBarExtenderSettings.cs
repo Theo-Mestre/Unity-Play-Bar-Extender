@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "PlayBarExtenderSettings", menuName = "PlayBarExtender/PlayBarExtenderSettings")]
 public class PlayBarExtenderSettings : ScriptableObject
@@ -17,4 +18,8 @@ public class PlayBarExtenderSettings : ScriptableObject
     [Tooltip("Functions to call when 'Play From Here' is enabled")]
     [SerializeField]
     public UnityEvent PlayerFromHereFunctions = new();
+
+    [Tooltip("Functions to call when using 'Cheat Functions'")]
+    [SerializeField]
+    public List<UnityEvent> CheatFunctions = new();
 }

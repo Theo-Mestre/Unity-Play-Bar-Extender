@@ -50,6 +50,13 @@ namespace PlayBarExtender
             EditorGUILayout.PropertyField(serializedProperty);
             serializedObject.ApplyModifiedProperties();
 
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Add functions in the cheat sheet drop down");
+            serializedObject.Update();
+            serializedProperty = serializedObject.FindProperty("CheatFunctions");
+            EditorGUILayout.PropertyField(serializedProperty, true);
+            serializedObject.ApplyModifiedProperties();
+
             if (GUI.changed)
             {
                 EditorUtility.SetDirty(settings);
