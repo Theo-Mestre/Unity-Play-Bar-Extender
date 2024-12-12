@@ -48,6 +48,8 @@ Go to `Tools/Play Bar Extender Settings`, this will open a window where you can 
 
 Since **version 1.1**, this window also allow you to add function to the cheat sheet dropdown menu and edit the time scale slider's clamp values
 
+The Cheat Sheet may not appear until there are **functions registered!**
+
 ## Requirements
 
 - Unity 6.0 or higher
