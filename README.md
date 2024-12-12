@@ -2,7 +2,7 @@
 
 **Play Bar Extender** is a package made for Unity 6 that allow to add features to the play.
 
-![PlayBarExtender](https://github.com/user-attachments/assets/83ab38f0-bb3d-489c-a994-f579d5e77489)
+![AssetsDirectoryCreator](https://github.com/user-attachments/assets/fd87abab-cf3c-41f3-85ba-6cb3b28cbf07)
 
 This project has been inspired by [marijnz's unity-toolbar-extender](https://github.com/marijnz/unity-toolbar-extender).
 
@@ -19,6 +19,13 @@ This project has been inspired by [marijnz's unity-toolbar-extender](https://git
 - Spawn Player at Editor Camera: Automatically place your player at the editor camera's location when starting the game.
 - Move Player While Playing: Relocate the player to the editor camera's current position during play mode.
 - Customizable Actions: Add custom functions to the "Play From Here" behavior using a ScriptableObject, configurable via an editor window.
+
+### Time Scaler
+- Change the time scale directly from the slider on the play bar.
+
+### Cheat Sheet
+- Call function anytime: Call gameplay function by clicking a button to make debug easier.
+- Customize Actions: You can add your own functions using a ScriptableObject, configurable via an editor window.
 
 ## Installation
 
@@ -37,7 +44,11 @@ You can enable `Play from here` by the clicking the toggle button.
 You can also add Function to be called when `Play from here` is enabled.
 Go to `Tools/Play Bar Extender Settings`, this will open a window where you can change the settings of the button.
 
-![PlayBarExtenderWindow](https://github.com/user-attachments/assets/87554041-79f3-4447-bbd4-ad039d567415)
+![AssetsDirectoryCreatorWindow](https://github.com/user-attachments/assets/7feb51da-f5eb-4fba-b66b-9fae694429cc)
+
+Since **version 1.1**, this window also allow you to add function to the cheat sheet dropdown menu and edit the time scale slider's clamp values
+
+The Cheat Sheet may not appear until there are **functions registered!**
 
 ## Requirements
 

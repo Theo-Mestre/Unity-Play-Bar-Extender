@@ -7,6 +7,7 @@ namespace PlayBarExtender
     {
         static PlayBarExtenderSettings settings;
         static SerializedObject serializedObject;
+        static Vector2 scrollViewPosition;
 
         [MenuItem("Tools/Play Bar Extender Settings")]
         public static void ShowWindow()
@@ -32,6 +33,8 @@ namespace PlayBarExtender
             float originalValue = EditorGUIUtility.labelWidth;
             EditorGUIUtility.labelWidth = 225.0f;
 
+            scrollViewPosition = GUILayout.BeginScrollView(scrollViewPosition);
+
             EditorGUILayout.Space();
             settings.UseDefaultSpawnFunctions = EditorGUILayout.Toggle("Use Default Spawn Functions", settings.UseDefaultSpawnFunctions, GUILayout.ExpandWidth(true));
 
@@ -56,6 +59,8 @@ namespace PlayBarExtender
             serializedProperty = serializedObject.FindProperty("CheatFunctions");
             EditorGUILayout.PropertyField(serializedProperty, true);
             serializedObject.ApplyModifiedProperties();
+
+            GUILayout.EndScrollView();
 
             if (GUI.changed)
             {
